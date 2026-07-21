@@ -1,0 +1,58 @@
+Arrays 
+
+Introduction
+
+An Array is a linear data structure that stores elements of the same data type in contiguous memory locations.
+Elements are accessed using an index, starting from 0.
+
+Array Representation in Memory
+
+Arrays are stored in continuous memory locations.
+The address of an element is calculated using:
+Address = Base Address + (Index × Size of Data Type)
+This enables constant-time (O(1)) random access.
+
+Array Traversal
+
+Traversal means visiting each element of the array one by one.
+Used to display, process, or update array elements.
+Time Complexity: O(n)
+
+Searching in Arrays
+
+1. Linear Search
+Checks each element sequentially.
+Works on both sorted and unsorted arrays.
+Time Complexity: O(n)
+
+2. Binary Search
+Works only on sorted arrays.
+Repeatedly divides the search space into halves.
+Time Complexity: O(log n)
+
+Measuring Time Complexity
+
+Accessing an element: O(1)
+Traversing an array: O(n)
+Searching (Linear): O(n)
+Searching (Binary): O(log n) (sorted arrays only)
+Insertion/Deletion: O(n) (due to shifting of elements)
+
+When to Use Arrays
+
+When the number of elements is fixed or known in advance.
+When fast random access to elements is required.
+When memory efficiency is important.
+Suitable for storing homogeneous data like marks, salaries, temperatures, etc.
+
+Advantages
+
+Fast access using index (O(1)).
+Simple to implement.
+Efficient memory usage due to contiguous storage.
+
+Disadvantages
+
+Fixed size (cannot grow dynamically).
+Insertion and deletion are costly (O(n)).
+Can lead to memory wastage or overflow if size is not chosen properly.

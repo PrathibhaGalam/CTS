@@ -1,0 +1,680 @@
+Fundamentals of Unit Testing
+1. What is Unit Testing?
+
+Unit testing is the process of testing the smallest testable part of a software application independently.
+
+A unit can be:
+
+A method
+A function
+A class
+A small module
+Example
+public int Add(int a, int b)
+{
+    return a + b;
+}
+
+A unit test checks this method independently:
+
+[Test]
+public void Add_ReturnsCorrectResult()
+{
+    Calculator calculator = new Calculator();
+
+    int result = calculator.Add(2, 3);
+
+    Assert.That(result, Is.EqualTo(5));
+}
+
+The test verifies:
+
+Input:  2, 3
+Expected Output: 5
+Actual Output: 5
+
+Therefore:
+
+TEST PASSES
+2. Characteristics of Good Unit Tests
+
+A good unit test should follow several important principles.
+
+1. Fast
+
+Unit tests should execute quickly.
+
+Good:
+1000 tests → 2 seconds
+
+Bad:
+1000 tests → 30 minutes
+
+Fast tests encourage developers to run tests frequently.
+
+2. Independent
+
+Each test should work independently.
+
+Bad Example
+Test 1 creates a user
+Test 2 depends on the user created by Test 1
+
+If Test 1 fails, Test 2 also fails even though Test 2's code may be correct.
+
+Good Example
+
+Each test creates its own required data.
+
+Test 1 → independent
+Test 2 → independent
+Test 3 → independent
+3. Repeatable
+
+The same test should give the same result every time.
+
+Run 1 → Pass
+Run 2 → Pass
+Run 3 → Pass
+
+A test should not randomly pass and fail.
+
+4. Readable
+
+Anyone should be able to understand what the test is checking.
+
+Poor Name
+[Test]
+public void Test1()
+{
+}
+Good Name
+[Test]
+public void Add_TwoPositiveNumbers_ReturnsCorrectSum()
+{
+}
+5. Focused
+
+A unit test should test one behavior.
+
+Bad
+Test login
+Test database
+Test payment
+Test email
+
+all inside one test.
+
+Good
+Test login separately
+Test database separately
+Test payment separately
+Test email separately
+6. Deterministic
+
+A test should produce the same result when run under the same conditions.
+
+Tests should avoid depending on:
+
+Current time
+Random values
+Internet connection
+External services
+Uncontrolled databases
+3. What to Test and What Not to Test
+What Should Be Tested?
+A. Business Logic
+
+Example:
+
+public decimal CalculateDiscount(decimal price)
+{
+    return price * 0.10m;
+}
+
+Test:
+
+[Test]
+public void CalculateDiscount_ReturnsTenPercent()
+{
+    decimal result = CalculateDiscount(1000);
+
+    Assert.That(result, Is.EqualTo(100));
+}
+B. Boundary Conditions
+
+Boundary conditions are values at the limits.
+
+Example:
+
+Age must be between 18 and 60
+
+Test:
+
+17 → Invalid
+18 → Valid
+60 → Valid
+61 → Invalid
+C. Invalid Inputs
+
+Test what happens when incorrect input is provided.
+
+Empty username
+Negative price
+Null value
+Invalid email
+D. Error Handling
+
+Example:
+
+[Test]
+public void Divide_ByZero_ThrowsException()
+{
+    Assert.Throws<DivideByZeroException>(
+        () => calculator.Divide(10, 0)
+    );
+}
+E. Important Business Rules
+
+Example:
+
+If order amount > ₹5000
+Then discount should be applied
+
+This business rule should be tested.
+
+What Should NOT Usually Be Tested in Unit Tests?
+1. Framework Functionality
+
+You normally do not need to test whether List<T> works correctly.
+
+List<int> numbers = new List<int>();
+numbers.Add(10);
+
+The .NET framework has already been tested.
+
+2. Simple Getters and Setters
+
+For example:
+
+public string Name { get; set; }
+
+There is usually no need to write a unit test for such a simple property.
+
+3. Third-Party Libraries
+
+You normally do not test whether an external library works correctly.
+
+Instead, test how your code uses the library.
+
+4. Implementation Details
+
+Tests should focus on behavior rather than internal implementation.
+
+Example
+
+You want to test:
+
+User can successfully log in
+
+Not necessarily:
+
+Method login() uses exactly 3 internal private methods
+
+If internal implementation changes but the behavior remains correct, the test should still pass.
+
+4. Naming Tests
+
+Good naming makes tests easy to understand.
+
+A useful naming pattern is:
+
+MethodName_Condition_ExpectedResult
+Example
+Add_TwoNumbers_ReturnsSum
+
+Meaning:
+
+Method: Add
+Condition: Two numbers
+Expected result: Returns sum
+
+Another example:
+
+Login_InvalidPassword_ReturnsFalse
+
+This means:
+
+When password is invalid
+Login should return false
+Common Naming Styles
+Style 1
+Add_ReturnsSum()
+Style 2
+Add_TwoNumbers_ReturnsCorrectSum()
+Style 3
+WhenTwoNumbersAreAdded_TheCorrectSumIsReturned()
+
+The most important thing is consistency and clarity.
+
+5. Organizing Tests
+
+A common project structure is:
+
+MyApplication
+│
+├── MyApplication
+│   ├── Calculator.cs
+│   ├── UserService.cs
+│   └── OrderService.cs
+│
+└── MyApplication.Tests
+    ├── CalculatorTests.cs
+    ├── UserServiceTests.cs
+    └── OrderServiceTests.cs
+Production Code
+Calculator.cs
+Test Code
+CalculatorTests.cs
+
+This makes it easy to find tests for each class.
+
+6. The AAA Pattern
+
+Most unit tests follow:
+
+Arrange → Act → Assert
+Arrange
+
+Prepare the required data.
+
+int a = 10;
+int b = 20;
+Act
+
+Call the method being tested.
+
+int result = calculator.Add(a, b);
+Assert
+
+Check the result.
+
+Assert.That(result, Is.EqualTo(30));
+Complete Example
+[Test]
+public void Add_TwoNumbers_ReturnsSum()
+{
+    // Arrange
+    Calculator calculator = new Calculator();
+    int a = 10;
+    int b = 20;
+
+    // Act
+    int result = calculator.Add(a, b);
+
+    // Assert
+    Assert.That(result, Is.EqualTo(30));
+}
+7. Black-Box Testing
+
+Black-box testing tests the behavior of a system without knowing or examining its internal implementation.
+
+The tester focuses on:
+
+Input → System → Output
+Example
+
+Suppose we have:
+
+Calculator
+
+We know:
+
+Input: 5 and 3
+Expected Output: 8
+
+But we do not need to know how the addition is internally implemented.
+
+5 + 3
+  ↓
+[ Calculator ]
+  ↓
+  8
+
+The internal code is treated as a black box.
+
+Black-Box Testing Example
+[Test]
+public void Login_ValidCredentials_ReturnsTrue()
+{
+    bool result = loginService.Login(
+        "user@example.com",
+        "password123"
+    );
+
+    Assert.That(result, Is.True);
+}
+
+The test focuses on:
+
+Input:
+Valid username
+Valid password
+
+Expected:
+Login succeeds
+
+It does not care about the internal code used to validate the password.
+
+Black-Box vs White-Box Testing
+Black-Box Testing	White-Box Testing
+Internal code is not considered	Internal code is examined
+Focuses on input and output	Focuses on code paths
+Tests behavior	Tests implementation
+Tester may not know source code	Tester understands source code
+8. Set Up and Tear Down
+
+Sometimes every test needs common preparation and cleanup.
+
+NUnit provides special methods for this.
+
+[SetUp]
+
+The [SetUp] method runs before every test.
+
+[TestFixture]
+public class CalculatorTests
+{
+    private Calculator calculator;
+
+    [SetUp]
+    public void Setup()
+    {
+        calculator = new Calculator();
+    }
+
+    [Test]
+    public void Add_ReturnsCorrectSum()
+    {
+        int result = calculator.Add(2, 3);
+
+        Assert.That(result, Is.EqualTo(5));
+    }
+}
+
+Execution:
+
+Setup()
+   ↓
+Test 1
+   ↓
+Setup()
+   ↓
+Test 2
+[TearDown]
+
+The [TearDown] method runs after every test.
+
+[TearDown]
+public void Cleanup()
+{
+    calculator = null;
+}
+
+Execution:
+
+Setup
+  ↓
+Test
+  ↓
+TearDown
+[OneTimeSetUp]
+
+Runs once before all tests in the class.
+
+[OneTimeSetUp]
+public void OneTimeSetup()
+{
+}
+[OneTimeTearDown]
+
+Runs once after all tests finish.
+
+[OneTimeTearDown]
+public void OneTimeCleanup()
+{
+}
+9. Parameterized Tests
+
+A parameterized test runs the same test with different input values.
+
+Without parameterization:
+
+[Test]
+public void Add_2_3_Returns5()
+{
+}
+
+[Test]
+public void Add_10_20_Returns30()
+{
+}
+
+[Test]
+public void Add_100_200_Returns300()
+{
+}
+
+This creates repetitive code.
+
+Using [TestCase]
+[TestCase(2, 3, 5)]
+[TestCase(10, 20, 30)]
+[TestCase(100, 200, 300)]
+public void Add_ReturnsCorrectSum(
+    int a,
+    int b,
+    int expected)
+{
+    int result = calculator.Add(a, b);
+
+    Assert.That(result, Is.EqualTo(expected));
+}
+
+The test runs three times:
+
+2 + 3 = 5
+10 + 20 = 30
+100 + 200 = 300
+
+This is much shorter and easier to maintain.
+
+10. Ignoring Tests
+
+Sometimes a test cannot currently be executed.
+
+For example:
+
+Feature is still under development
+Test depends on unavailable functionality
+Known issue exists
+Test is temporarily disabled
+
+NUnit allows tests to be ignored.
+
+[Test]
+[Ignore("Feature is not implemented yet")]
+public void FutureFeatureTest()
+{
+}
+
+The test will not run.
+
+Important Warning
+
+Ignoring tests should be temporary.
+
+Bad practice:
+
+Test fails
+    ↓
+Ignore test
+    ↓
+Forget about it
+
+Good practice:
+
+Test fails
+    ↓
+Understand the reason
+    ↓
+Temporarily ignore if necessary
+    ↓
+Fix the issue
+    ↓
+Enable the test again
+
+A large number of ignored tests may indicate poor software quality.
+
+11. Writing Trustworthy Tests
+
+A trustworthy test gives us confidence that the software really works.
+
+1. Test Real Behavior
+
+Test what the user or system expects.
+
+Good:
+User can successfully log in
+
+Weak:
+Private variable x equals true
+2. Avoid Test Interdependence
+
+Each test should work independently.
+
+Test A should not be required for Test B
+3. Avoid Random Data
+
+Bad:
+
+int number = new Random().Next();
+
+The result may be different each time.
+
+Prefer predictable data:
+
+int number = 10;
+4. Avoid Depending on Current Time
+
+Bad:
+
+DateTime.Now
+
+The test may behave differently depending on the time.
+
+5. Use Meaningful Assertions
+Weak
+Assert.That(result, Is.Not.Null);
+Better
+Assert.That(result, Is.EqualTo(100));
+
+A precise assertion provides more confidence.
+
+6. Test Both Success and Failure
+
+For a login system:
+
+Valid username + valid password → Success
+Invalid username → Failure
+Invalid password → Failure
+Empty username → Failure
+Empty password → Failure
+7. Keep Tests Small
+
+A test should ideally test one behavior.
+
+One test → One behavior
+Complete NUnit Example
+Production Code
+public class Calculator
+{
+    public int Add(int a, int b)
+    {
+        return a + b;
+    }
+
+    public int Divide(int a, int b)
+    {
+        return a / b;
+    }
+}
+Test Code
+using NUnit.Framework;
+
+[TestFixture]
+public class CalculatorTests
+{
+    private Calculator calculator;
+
+    [SetUp]
+    public void Setup()
+    {
+        calculator = new Calculator();
+    }
+
+    [Test]
+    public void Add_TwoNumbers_ReturnsCorrectSum()
+    {
+        // Arrange
+        int a = 10;
+        int b = 20;
+
+        // Act
+        int result = calculator.Add(a, b);
+
+        // Assert
+        Assert.That(result, Is.EqualTo(30));
+    }
+
+    [TestCase(2, 2, 1)]
+    [TestCase(10, 2, 5)]
+    [TestCase(100, 10, 10)]
+    public void Divide_ReturnsCorrectResult(
+        int a,
+        int b,
+        int expected)
+    {
+        int result = calculator.Divide(a, b);
+
+        Assert.That(result, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void Divide_ByZero_ThrowsException()
+    {
+        Assert.Throws<DivideByZeroException>(
+            () => calculator.Divide(10, 0)
+        );
+    }
+
+    [TearDown]
+    public void Cleanup()
+    {
+        calculator = null;
+    }
+}
+Quick Revision Summary
+Topic	Meaning
+Unit Testing	Testing a small, independent part of code
+Good Unit Test	Fast, independent, repeatable, readable, deterministic
+What to Test	Business logic, boundaries, errors, invalid inputs
+What Not to Test	Framework functionality and trivial implementation details
+Test Naming	Clearly describes method, condition, and expected result
+AAA Pattern	Arrange → Act → Assert
+Black-Box Testing	Testing input/output without knowing internal implementation
+SetUp	Runs before every test
+TearDown	Runs after every test
+Parameterized Test	Same test with multiple input values
+Ignoring Tests	Temporarily skips a test
+Trustworthy Tests	Tests that provide reliable confidence in software behavior

@@ -1,0 +1,589 @@
+Automated Testing and TDD — Explained Simply
+1. What is Automated Testing?
+
+Automated testing is the process of using software tools and scripts to automatically execute test cases, compare actual results with expected results, and report whether the software passes or fails.
+
+Manual Testing
+
+A tester manually performs actions:
+
+Open application
+Enter username
+Enter password
+Click Login
+Check whether login succeeds
+Automated Testing
+
+A program performs the same steps automatically:
+
+testLogin()
+{
+    openApplication();
+    enterUsername("user1");
+    enterPassword("1234");
+    clickLogin();
+    assert(loginSuccessful == true);
+}
+
+So, instead of a human repeating the same test every time, a testing tool executes it automatically.
+
+2. Benefits of Automated Testing
+1. Saves Time
+
+Automated tests can execute hundreds or thousands of test cases quickly.
+
+2. Reduces Human Errors
+
+A person may accidentally enter the wrong input or miss a step. Automated scripts perform the same steps consistently.
+
+3. Tests Can Be Repeated Easily
+
+The same tests can be run after every code change.
+
+4. Faster Feedback
+
+Developers can immediately know whether a new change has broken existing functionality.
+
+5. Supports Regression Testing
+
+Regression testing means checking that new changes have not broken old functionality.
+
+Example:
+
+Version 1: Login works
+Version 2: Add payment feature
+
+After adding payment, automated tests can quickly check:
+
+Login still works?
+Registration still works?
+Search still works?
+Payment works?
+6. Better Software Quality
+
+Automated testing helps find bugs early.
+
+7. Useful in CI/CD
+
+Automated tests can run automatically whenever developers push code to platforms such as GitHub or a build server.
+
+Important: Automation does not completely replace manual testing. Exploratory testing, usability testing, and tests requiring human judgment may still need manual testers.
+
+3. Types of Tests
+
+Software testing can be divided into several levels.
+
+A. Unit Testing
+
+Tests the smallest individual part of a program, usually a method or function.
+
+Example:
+
+public int Add(int a, int b)
+{
+    return a + b;
+}
+
+Unit test:
+
+[Test]
+public void Add_ReturnsCorrectSum()
+{
+    int result = Add(2, 3);
+
+    Assert.That(result, Is.EqualTo(5));
+}
+
+Here, only the Add() method is being tested.
+
+Characteristics
+Very fast
+Tests small pieces of code
+Easy to run frequently
+B. Integration Testing
+
+Tests whether multiple components work correctly together.
+
+Example:
+
+Application
+    ↓
+Database
+    ↓
+Payment Service
+
+An integration test may check whether:
+
+Application → Database
+
+works correctly.
+
+C. System / End-to-End Testing
+
+Tests the complete application from beginning to end.
+
+Example of an e-commerce test:
+
+Open website
+    ↓
+Login
+    ↓
+Search product
+    ↓
+Add product to cart
+    ↓
+Make payment
+    ↓
+Receive order confirmation
+
+This tests the complete system.
+
+D. Acceptance Testing
+
+Checks whether the software satisfies the requirements of the customer or user.
+
+Example:
+
+Requirement:
+
+A customer must be able to successfully purchase a product.
+
+Acceptance test:
+
+Given a logged-in customer
+When the customer buys a product
+Then the order should be successfully created
+E. Regression Testing
+
+Checks whether existing features still work after new changes are made.
+
+Example:
+
+Old Feature: Login
+New Feature: Online Payment
+
+After adding online payment, regression tests verify that login still works.
+
+F. Performance Testing
+
+Checks the performance of the system.
+
+It may measure:
+
+Response time
+Number of users supported
+Memory usage
+CPU usage
+System stability
+
+Example:
+
+Can the application handle 10,000 users simultaneously?
+4. The Test Pyramid
+
+The Test Pyramid is a strategy for deciding how many tests should be written at different levels.
+
+It generally looks like this:
+
+             /\
+            /  \
+           / E2E\
+          /------\
+         /        \
+        /Integration\
+       /------------\
+      /              \
+     /  Unit Tests    \
+    /------------------\
+
+The basic idea is:
+
+Write many fast unit tests, fewer integration tests, and very few end-to-end tests.
+
+Bottom: Unit Tests
+
+You should have many unit tests.
+
+1000 unit tests
+
+Advantages:
+
+Fast
+Cheap
+Easy to debug
+Middle: Integration Tests
+
+You should have fewer integration tests.
+
+100 integration tests
+
+They test the communication between components.
+
+Example:
+
+Application ↔ Database
+Top: End-to-End Tests
+
+You should have fewer end-to-end tests.
+
+10 E2E tests
+
+They test the entire application.
+
+They are usually:
+
+Slow
+More expensive
+More difficult to maintain
+Simple Example
+
+Imagine an online shopping application.
+
+Test Type	Example	Number
+Unit	Calculate total price	Many
+Integration	Application connects to database	Some
+E2E	Login → Cart → Payment → Order	Few
+
+The Test Pyramid promotes a fast and reliable test suite.
+
+5. Popular Testing Frameworks
+
+A testing framework provides tools and features for writing and executing automated tests.
+
+C# / .NET
+
+Popular frameworks include:
+
+NUnit
+MSTest
+xUnit
+Java
+
+Popular frameworks:
+
+JUnit
+TestNG
+Python
+
+Popular frameworks:
+
+pytest
+unittest
+JavaScript
+
+Popular frameworks:
+
+Jest
+Mocha
+Jasmine
+
+For your topic, we will focus on NUnit with C# and Visual Studio.
+
+6. Using NUnit in Visual Studio
+
+NUnit is a unit-testing framework for .NET applications.
+
+A typical NUnit test contains:
+
+Arrange
+   ↓
+Act
+   ↓
+Assert
+
+This is called the AAA pattern.
+
+Step 1: Create a Project
+
+In Visual Studio:
+
+Create a new project
+        ↓
+Select NUnit Test Project
+        ↓
+Choose C#
+        ↓
+Create
+
+The official NUnit template includes the necessary test framework and Visual Studio integration components.
+
+Step 2: Create the Class to Test
+public class Calculator
+{
+    public int Add(int a, int b)
+    {
+        return a + b;
+    }
+
+    public int Subtract(int a, int b)
+    {
+        return a - b;
+    }
+}
+Step 3: Write the NUnit Test
+using NUnit.Framework;
+
+[TestFixture]
+public class CalculatorTests
+{
+    private Calculator calculator;
+
+    [SetUp]
+    public void Setup()
+    {
+        calculator = new Calculator();
+    }
+
+    [Test]
+    public void Add_TwoNumbers_ReturnsSum()
+    {
+        // Arrange
+        int a = 10;
+        int b = 20;
+
+        // Act
+        int result = calculator.Add(a, b);
+
+        // Assert
+        Assert.That(result, Is.EqualTo(30));
+    }
+}
+Important NUnit Attributes
+[TestFixture]
+
+Indicates that a class contains test methods.
+
+[TestFixture]
+public class CalculatorTests
+{
+}
+[Test]
+
+Indicates that a method is a test.
+
+[Test]
+public void TestAddition()
+{
+}
+[SetUp]
+
+Runs before every test.
+
+[SetUp]
+public void Setup()
+{
+    calculator = new Calculator();
+}
+[TearDown]
+
+Runs after every test.
+
+[TearDown]
+public void Cleanup()
+{
+}
+Assert
+
+Checks whether the actual result is what we expect.
+
+Assert.That(result, Is.EqualTo(30));
+
+Another example:
+
+Assert.That(name, Is.EqualTo("Prathibha"));
+
+You can run and manage NUnit tests through Visual Studio's Test Explorer using the NUnit test adapter.
+
+7. What is Test-Driven Development (TDD)?
+
+Test-Driven Development, or TDD, is a software development technique where you write the test before writing the actual code.
+
+Normally:
+
+Write Code
+    ↓
+Write Test
+    ↓
+Run Test
+
+In TDD:
+
+Write Test
+    ↓
+Test Fails
+    ↓
+Write Minimum Code
+    ↓
+Test Passes
+    ↓
+Improve Code
+
+This is called the:
+
+Red → Green → Refactor Cycle
+Step 1: Red
+
+Write a test before the code exists.
+
+Example:
+
+[Test]
+public void Add_TwoNumbers_ReturnsSum()
+{
+    Calculator calculator = new Calculator();
+
+    int result = calculator.Add(2, 3);
+
+    Assert.That(result, Is.EqualTo(5));
+}
+
+Initially, the Add() method may not exist.
+
+Therefore:
+
+TEST FAILS
+
+This is the Red stage.
+
+Step 2: Green
+
+Now write the minimum code required to pass the test.
+
+public int Add(int a, int b)
+{
+    return a + b;
+}
+
+Now:
+
+TEST PASSES
+
+This is the Green stage.
+
+Step 3: Refactor
+
+Improve the code without changing its behavior.
+
+For example:
+
+public int Add(int a, int b)
+{
+    return a + b;
+}
+
+The code is already simple, so no major refactoring is necessary.
+
+The cycle is:
+
+       ┌──────────────┐
+       │  Write Test  │
+       └──────┬───────┘
+              ↓
+          🔴 RED
+              ↓
+       ┌──────────────┐
+       │  Write Code  │
+       └──────┬───────┘
+              ↓
+         🟢 GREEN
+              ↓
+       ┌──────────────┐
+       │   Refactor   │
+       └──────┬───────┘
+              ↓
+          Repeat
+
+With TDD, tests can serve both as verification and as a specification of the expected behavior of the code.
+
+Complete Example of TDD
+Requirement
+
+Create a method that checks whether a number is even.
+
+1. Write the Test First
+[Test]
+public void IsEven_EvenNumber_ReturnsTrue()
+{
+    Calculator calculator = new Calculator();
+
+    bool result = calculator.IsEven(10);
+
+    Assert.That(result, Is.True);
+}
+
+At this point:
+
+IsEven() does not exist
+
+So the test fails.
+
+🔴 RED
+
+2. Write the Code
+public bool IsEven(int number)
+{
+    return number % 2 == 0;
+}
+
+Now the test passes.
+
+🟢 GREEN
+
+3. Refactor
+
+Check whether the code can be improved while keeping the same behavior.
+
+Test still passes
+        ↓
+Code is reliable
+
+This is REFACTOR.
+
+Automated Testing vs TDD
+
+These are related but different concepts.
+
+Automated Testing	TDD
+Tests are executed automatically	Tests are written before code
+Focuses on automation	Focuses on development process
+Can be used after writing code	Test comes first
+Example: NUnit test	Red → Green → Refactor
+Simple Relationship
+NUnit = Tool/Framework
+Automated Testing = Technique
+TDD = Development Methodology
+Important Exam Summary
+Automated Testing
+
+Using software tools and scripts to execute tests automatically.
+
+Benefits
+Saves time
+Reduces human errors
+Provides fast feedback
+Supports regression testing
+Improves software quality
+Supports CI/CD
+Types of Tests
+Unit Testing
+Integration Testing
+System / End-to-End Testing
+Acceptance Testing
+Regression Testing
+Performance Testing
+Test Pyramid
+Few E2E Tests
+Some Integration Tests
+Many Unit Tests
+NUnit
+
+A C#/.NET testing framework using attributes such as:
+
+[TestFixture]
+[Test]
+[SetUp]
+[TearDown]
+TDD
+RED → GREEN → REFACTOR
+
+Write a failing test → Write code to pass it → Improve the code → Repeat.

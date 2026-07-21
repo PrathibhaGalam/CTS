@@ -1,0 +1,67 @@
+Searching Algorithms – Summary
+Introduction
+Searching is the process of finding the location of a specific element in a data structure.
+It is one of the fundamental operations in Data Structures and Algorithms.
+The two most common searching algorithms are Linear Search and Binary Search.
+1. Linear Search
+Checks each element one by one until the target element is found or the list ends.
+Works with both sorted and unsorted data.
+Easy to implement but inefficient for large datasets.
+
+Time Complexity
+
+Best Case: O(1) (element found at the first position)
+Average Case: O(n)
+Worst Case: O(n) (element found at the last position or not found)
+2. Binary Search
+Repeatedly divides the search space into two halves to find the target element.
+Requires the data to be sorted before searching.
+Much faster than linear search for large datasets.
+
+Time Complexity
+
+Best Case: O(1) (element found at the middle)
+Average Case: O(log n)
+Worst Case: O(log n)
+Comparison of Searching Algorithms
+Feature	Linear Search	Binary Search
+Data Requirement	Sorted or Unsorted	Sorted only
+Searching Method	Sequential search	Divide and conquer
+Best Case	O(1)	O(1)
+Average Case	O(n)	O(log n)
+Worst Case	O(n)	O(log n)
+Advantages
+
+Linear Search
+
+Simple to implement.
+Works on both sorted and unsorted data.
+Suitable for small datasets.
+
+Binary Search
+
+Very fast for large sorted datasets.
+Reduces the search space by half in each step.
+More efficient than linear search for large inputs.
+Disadvantages
+
+Linear Search
+
+Slow for large datasets.
+Checks elements one by one.
+
+Binary Search
+
+Works only on sorted data.
+Sorting may add extra overhead if the data is initially unsorted.
+
+Applications
+
+Linear Search: Small datasets, unsorted arrays, linked lists.
+Binary Search: Large sorted arrays, databases, dictionaries, searching in sorted files.
+
+Key Points
+
+Linear Search scans elements sequentially and has O(n) worst-case time complexity.
+Binary Search uses the divide-and-conquer technique and has O(log n) worst-case time complexity.
+Binary Search is preferred for large, sorted datasets, while Linear Search is suitable for small or unsorted datasets.

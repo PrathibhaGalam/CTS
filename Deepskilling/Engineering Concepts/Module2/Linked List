@@ -1,0 +1,80 @@
+Linked List 
+
+Introduction
+
+A Linked List is a linear data structure consisting of nodes connected through pointers.
+
+Each node contains:
+Data
+Pointer(s) to the next node (and previous node in doubly linked lists).
+Unlike arrays, linked lists do not store elements in contiguous memory.
+They are dynamic in size and allow efficient insertion and deletion.
+
+Types of Linked Lists
+
+1. Singly Linked List (SLL)
+Each node contains data and a next pointer.
+Traversal is possible only in the forward direction.
+
+2. Circular Singly Linked List (CSLL)
+Similar to a singly linked list.
+The last node points back to the first node, forming a circular structure.
+
+3. Doubly Linked List (DLL)
+Each node contains:
+Data
+Previous pointer
+Next pointer
+Supports both forward and backward traversal.
+
+4. Circular Doubly Linked List (CDLL)
+Similar to a doubly linked list.
+The last node points to the first node, and the first node points back to the last node.
+
+Operations on Linked Lists
+
+Traversal
+
+Visit each node sequentially.
+Time Complexity: O(n)
+
+Searching
+
+Search for an element by traversing the list.
+Time Complexity: O(n)
+
+Insertion
+
+At the beginning: O(1)
+At the end:
+O(n) (without tail pointer)
+O(1) (with tail pointer)
+At a specific position: O(n)
+
+Deletion
+
+From the beginning: O(1)
+From the end: O(n)
+At a specific position: O(n)
+
+Advantages
+
+Dynamic size (grows and shrinks at runtime).
+Efficient insertion and deletion.
+Does not require contiguous memory.
+Better memory utilization for dynamic data.
+
+Disadvantages
+
+No direct/random access to elements.
+Searching is slower than arrays.
+Extra memory is needed for pointers.
+Sequential traversal increases access time.
+
+Applications
+
+Implementing Stacks and Queues.
+Dynamic memory allocation.
+Music playlists and image viewers.
+Browser history navigation.
+Undo/Redo operations in editors.

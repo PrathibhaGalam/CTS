@@ -1,0 +1,60 @@
+Design Patterns – Summary (Points)
+
+* Design Pattern is a reusable solution to common software design problems.
+* It helps create maintainable, reusable, scalable, and flexible software.
+* Design patterns provide best practices and a common way to solve recurring design issues.
+* They improve communication among developers by using standard design concepts.
+
+Types of Design Patterns
+
+1. Creational Patterns
+
+* Focus on object creation.
+* Make object creation flexible and independent of concrete classes.
+* Examples:
+
+  * Singleton: Only one instance of a class.
+  * Factory: Creates objects without specifying their exact class.
+  * Builder: Builds complex objects step by step.
+
+2. Structural Patterns
+
+* Focus on combining classes and objects.
+* Help different components work together efficiently.
+* Examples:
+
+  * Adapter: Makes incompatible interfaces compatible.
+  * Decorator: Adds new functionality dynamically.
+  * Facade: Provides a simple interface to a complex system.
+
+3. Behavioral Patterns
+
+* Focus on communication and interaction between objects.
+* Define how responsibilities are shared among objects.
+* Examples:
+
+  * Observer: Notifies all registered objects when data changes.
+  * Strategy: Allows selecting different algorithms at runtime.
+  * Command: Encapsulates requests as command objects.
+
+Common Design Patterns
+
+* Singleton: Ensures only one object instance exists.
+* Factory: Creates objects without exposing creation logic.
+* Builder: Constructs complex objects step by step.
+* Adapter: Connects incompatible interfaces.
+* Decorator: Dynamically extends object functionality.
+* Observer: Automatically updates dependent objects.
+* Strategy: Switches algorithms during runtime.
+* Facade: Simplifies access to complex subsystems.
+* MVC: Separates an application into Model, View, and Controller.
+* MVVM: Uses a ViewModel to separate UI from business logic and supports data binding.
+
+Benefits of Design Patterns
+
+* Improve code reusability.
+* Increase maintainability.
+* Enhance flexibility and scalability.
+* Reduce tight coupling.
+* Encourage clean architecture and best coding practices.
+* Simplify software development and maintenance.

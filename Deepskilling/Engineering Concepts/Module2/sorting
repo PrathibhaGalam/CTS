@@ -1,0 +1,65 @@
+Sorting Algorithms :
+
+Introduction
+
+Sorting is the process of arranging data in a specific order, such as ascending or descending.
+Sorting improves the efficiency of searching, data processing, and other algorithms.
+
+Common Sorting Algorithms
+
+1. Bubble Sort
+Repeatedly compares adjacent elements and swaps them if they are in the wrong order.
+Simple but inefficient for large datasets.
+Best Case: O(n) (already sorted)
+Average Case: O(n²)
+Worst Case: O(n²)
+
+2. Insertion Sort
+Builds the sorted array one element at a time by inserting each element into its correct position.
+Efficient for small or nearly sorted datasets.
+Best Case: O(n)
+Average Case: O(n²)
+Worst Case: O(n²)
+
+3. Heap Sort
+Uses a Binary Heap data structure to sort elements.
+First builds a max heap, then repeatedly extracts the maximum element.
+Provides consistent performance.
+Best Case: O(n log n)
+Average Case: O(n log n)
+Worst Case: O(n log n)
+
+4. Quick Sort
+Uses the Divide and Conquer technique.
+Selects a pivot and partitions the array around it.
+Very fast in practice but performance depends on pivot selection.
+Best Case: O(n log n)
+Average Case: O(n log n)
+Worst Case: O(n²) (poor pivot selection)
+
+5. Merge Sort
+Also uses the Divide and Conquer technique.
+Recursively divides the array into halves and merges them in sorted order.
+Stable and efficient for large datasets.
+Best Case: O(n log n)
+Average Case: O(n log n)
+Worst Case: O(n log n)
+
+Time Complexity Comparison
+
+| Sorting Algorithm | Best Case  | Average Case | Worst Case |
+| ----------------- | ---------- | ------------ | ---------- |
+| Bubble Sort       | O(n)       | O(n²)        | O(n²)      |
+| Insertion Sort    | O(n)       | O(n²)        | O(n²)      |
+| Heap Sort         | O(n log n) | O(n log n)   | O(n log n) |
+| Quick Sort        | O(n log n) | O(n log n)   | O(n²)      |
+| Merge Sort        | O(n log n) | O(n log n)   | O(n log n) |
+
+
+Key Points
+Bubble Sort: Easy to implement but slow for large datasets.
+Insertion Sort: Best for small or nearly sorted data.
+Heap Sort: Consistent performance with no worst-case degradation.
+Quick Sort: Fastest on average but can degrade to O(n²).
+Merge Sort: Stable and efficient, but requires extra memory.
+Quick Sort and Merge Sort are widely used for large datasets due to their average O(n log n) performance.

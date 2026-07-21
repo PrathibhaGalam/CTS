@@ -1,0 +1,59 @@
+Analysis of Algorithms :
+
+Introduction
+
+Analysis of Algorithms is the process of evaluating an algorithm's efficiency in terms of execution time and memory usage.
+It helps compare different algorithms and choose the most efficient one for a given problem.
+
+Why Data Structures and Algorithms (DSA)?
+
+Improve program efficiency and performance.
+Reduce execution time and memory consumption.
+Solve complex problems effectively.
+Build scalable and optimized software applications.
+
+Types of Data Structures
+
+Linear Data Structures: Array, Linked List, Stack, Queue.
+Non-Linear Data Structures: Tree, Graph, Heap.
+
+Algorithm Analysis
+
+Measures an algorithm's performance regardless of hardware or programming language.
+Focuses on Time Complexity and Space Complexity.
+
+Time Complexity
+
+Represents the time required by an algorithm as the input size increases.
+Expressed using asymptotic notation.
+
+Space Complexity
+
+Represents the amount of memory used by an algorithm during execution.
+Asymptotic Notations
+Big O (O): Upper bound (Worst Case).
+Omega (Ω): Lower bound (Best Case).
+Theta (Θ): Tight bound (Average/Exact Case).
+
+Cases of Algorithm Analysis
+
+Best Case: Minimum execution time for a favorable input.
+Average Case: Expected execution time for a typical input.
+Worst Case: Maximum execution time for the least favorable input.
+
+Finding Time Complexity
+
+Analyze loops, nested loops, and recursive calls.
+Examples:
+Single loop → O(n)
+Nested loops → O(n²)
+Binary Search → O(log n)
+Merge Sort → O(n log n)
+Recursive algorithms are analyzed using recurrence relations.
+
+Importance
+
+Helps select the most efficient algorithm.
+Optimizes software performance.
+Reduces resource usage.
+Enables scalable and maintainable applications.
